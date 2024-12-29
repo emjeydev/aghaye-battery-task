@@ -6,6 +6,7 @@ import dev.emjey.aghaye_battery_task.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,12 +35,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+        user.setRegistrationDate(LocalDateTime.now());
         return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        User unwrappedUser = unwrapUser(userRepository.findById(id), id);
+        userRepository.deleteById(unwrappedUser.getId());
     }
 
     @Override

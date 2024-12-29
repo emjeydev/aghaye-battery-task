@@ -2,9 +2,11 @@ package dev.emjey.aghaye_battery_task.web;
 
 import dev.emjey.aghaye_battery_task.entity.User;
 import dev.emjey.aghaye_battery_task.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 

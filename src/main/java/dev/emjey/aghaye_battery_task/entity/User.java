@@ -1,6 +1,7 @@
 package dev.emjey.aghaye_battery_task.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,11 +34,11 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotNull
+    @NotBlank(message = "Fullname shouldn't be blank!")
     @Column(name = "fullname", nullable = false)
     private String fullname;
 
-    @NotNull
+    @NotBlank(message = "Email shouldn't be blank!")
     @Column(name = "email", nullable = false)
     private String email;
 
